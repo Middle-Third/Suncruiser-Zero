@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sun Cruiser Zero — The Social Energy Drink</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal:     #019EB1;
+  --teal-dk:  #016F7C;
+  --teal-lt:  #E0F5F8;
+  --yellow:   #FFDB4F;
+  --yellow-dk:#D4A800;
+  --white:    #FFFFFF;
+  --off:      #F8F4E8;
+  --dark:     #0D1F24;
+  --dark-mid: #122830;
+  --dark-lt:  #1A3840;
+  --gray:     #5A7A7E;
+  --lgray:    #E8F0F1;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--dark); overflow-x: hidden; }
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content:'';
+  position:fixed; inset:0; pointer-events:none; z-index:999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 3px; }
+
+/* ══════════════════════════════════
+   NAV
+══════════════════════════════════ */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  display: flex; align-items:center; justify-content:space-between;
+  padding: 16px 56px;
+  background: rgba(13,31,36,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(1,158,177,0.15);
+  transition: padding 0.3s;
+}
+nav.scrolled { padding: 10px 56px; }
+.nav-logo {
+  display: flex; align-items:center; gap: 12px;
+}
+.nav-logo img { height: 36px; object-fit:contain; }
+.nav-links { display:flex; gap:32px; list-style:none; }
+.nav-links a {
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600; font-size:0.8rem; letter-spacing:2px;
+  text-transform:uppercase; color:rgba(255,255,255,0.6);
+  text-decoration:none; transition:color 0.2s;
+}
+.nav-links a:hover { color: var(--yellow); }
+.nav-cta {
+  background: var(--yellow); color: var(--dark);
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;
+  border:none; padding: 10px 24px; cursor:pointer;
+  transition: all 0.2s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.nav-cta:hover { background: var(--teal); color: var(--white); }
+
+/* ══════════════════════════════════
+   HERO
+══════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  background: var(--dark);
+  display: flex; align-items:center;
+  position:relative; overflow:hidden;
+}
+.hero-grid {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(1,158,177,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(1,158,177,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: grid-drift 20s linear infinite;
+}
+@keyframes grid-drift { from{background-position:0 0} to{background-position:60px 60px} }
+
+.hero-glow {
+  position:absolute; width:800px; height:800px;
+  background: radial-gradient(circle, rgba(1,158,177,0.18) 0%, transparent 65%);
+  top:-200px; right:-200px;
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+.hero-glow2 {
+  position:absolute; width:500px; height:500px;
+  background: radial-gradient(circle, rgba(255,219,79,0.10) 0%, transparent 65%);
+  bottom:-100px; left:10%;
+  animation: pulse-glow 10s ease-in-out infinite reverse;
+}
+@keyframes pulse-glow { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.15);opacity:0.7} }
+
+.hero-inner {
+  position:relative; z-index:2;
+  max-width: 1280px; margin: 0 auto;
+  padding: 120px 56px 80px;
+  display: grid; grid-template-columns: 1fr 420px 1fr;
+  gap: 40px; align-items:center; width:100%;
+}
+
+.hero-left { animation: fade-up 0.8s ease both; }
+.hero-eyebrow {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:0.75rem; letter-spacing:5px; text-transform:uppercase;
+  color: var(--yellow); margin-bottom:20px;
+  display:flex; align-items:center; gap:12px;
+}
+.hero-eyebrow::before {
+  content:''; display:inline-block; width:28px; height:2px;
+  background: var(--yellow);
+}
+.hero-headline {
+  font-family:'Bebas Neue',sans-serif;
+  font-size: clamp(4rem,7vw,7.5rem);
+  line-height:0.88; letter-spacing:3px;
+  color: var(--white); margin-bottom:24px;
+}
+.hero-headline .hl-teal { color: var(--teal); }
+.hero-headline .hl-yellow { color: var(--yellow); }
+.hero-sub {
+  font-size:1.15rem; line-height:1.7; color:rgba(255,255,255,0.55);
+  max-width:400px; margin-bottom:40px;
+}
+.hero-buttons { display:flex; gap:16px; flex-wrap:wrap; }
+.btn-primary {
+  background: var(--yellow); color: var(--dark);
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:0.85rem; letter-spacing:2px; text-transform:uppercase;
+  border:none; padding:15px 36px; cursor:pointer;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: all 0.2s; position:relative; overflow:hidden;
+  text-decoration:none; display:inline-block;
+}
+.btn-primary::after {
+  content:''; position:absolute; inset:0;
+  background: rgba(255,255,255,0.2);
+  transform:translateX(-100%); transition:transform 0.3s;
+}
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(255,219,79,0.3); }
+.btn-primary:hover::after { transform:translateX(0); }
+.btn-outline {
+  background:transparent; color:var(--teal);
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:0.85rem; letter-spacing:2px; text-transform:uppercase;
+  border:2px solid var(--teal); padding:13px 36px; cursor:pointer;
+  transition:all 0.2s; text-decoration:none; display:inline-block;
+}
+.btn-outline:hover { background:var(--teal); color:var(--white); transform:translateY(-2px); }
+
+.hero-can-wrap {
+  display:flex; justify-content:center; align-items:center;
+  position:relative; animation: fade-up 0.8s 0.15s ease both;
+}
+.hero-can-glow {
+  position:absolute; width:320px; height:320px; border-radius:50%;
+  background: radial-gradient(circle, rgba(1,158,177,0.3) 0%, transparent 70%);
+  bottom:-20px; left:50%; transform:translateX(-50%);
+  filter:blur(24px);
+  animation: pulse-glow 5s ease-in-out infinite;
+}
+.hero-can {
+  width:300px; position:relative; z-index:2;
+  animation: float-can 6s ease-in-out infinite;
+  filter: drop-shadow(0 40px 60px rgba(1,158,177,0.4));
+}
+@keyframes float-can {
+  0%,100% { transform:translateY(0) rotate(-1deg); }
+  50% { transform:translateY(-22px) rotate(1deg); }
+}
+
+.hero-right { animation: fade-up 0.8s 0.3s ease both; }
+.hero-stats { display:flex; flex-direction:column; gap:12px; }
+.hero-stat {
+  display:flex; align-items:center; gap:16px;
+  padding:16px 20px;
+  background:rgba(1,158,177,0.07);
+  border-left:3px solid var(--teal);
+  transition:all 0.2s;
+}
+.hero-stat:nth-child(even) { border-left-color: var(--yellow); background:rgba(255,219,79,0.07); }
+.hero-stat:hover { transform:translateX(6px); background:rgba(1,158,177,0.12); }
+.stat-num {
+  font-family:'Bebas Neue',sans-serif; font-size:2.2rem;
+  color:var(--teal); line-height:1; min-width:70px;
+}
+.hero-stat:nth-child(even) .stat-num { color:var(--yellow); }
+.stat-label { font-size:0.85rem; color:rgba(255,255,255,0.55); line-height:1.4; }
+
+@keyframes fade-up { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── TICKER ── */
+.ticker {
+  background:var(--yellow); overflow:hidden; padding:11px 0;
+  white-space:nowrap;
+}
+.ticker-inner {
+  display:inline-flex; animation:ticker 30s linear infinite; gap:0;
+}
+.ticker-item {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:0.8rem; letter-spacing:3px; text-transform:uppercase;
+  color:var(--dark); padding:0 40px;
+}
+.ticker-item::after { content:'★'; margin-left:40px; }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ══════════════════════════════════
+   SECTION SHARED
+══════════════════════════════════ */
+section { padding: 100px 56px; }
+.section-inner { max-width:1280px; margin:0 auto; }
+.section-label {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:0.72rem; letter-spacing:4px; text-transform:uppercase;
+  color:var(--teal); margin-bottom:12px;
+  display:flex; align-items:center; gap:10px;
+}
+.section-label::before { content:''; display:inline-block; width:22px; height:2px; background:var(--teal); }
+.section-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,5vw,5rem);
+  line-height:0.95; letter-spacing:2px; margin-bottom:20px;
+}
+.section-title .hl-teal { color:var(--teal); }
+.section-title .hl-yellow { color:var(--yellow); }
+.section-intro { font-size:1.05rem; line-height:1.75; color:var(--gray); max-width:580px; }
+
+/* reveal on scroll */
+.reveal {
+  opacity:0; transform:translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-d1 { transition-delay:0.1s; }
+.reveal-d2 { transition-delay:0.2s; }
+.reveal-d3 { transition-delay:0.3s; }
+.reveal-d4 { transition-delay:0.4s; }
+.reveal-d5 { transition-delay:0.5s; }
+
+/* ══════════════════════════════════
+   MARKET OPPORTUNITY
+══════════════════════════════════ */
+.market { background:var(--dark); color:var(--white); }
+.market .section-intro { color:rgba(255,255,255,0.55); }
+.market-stats-row {
+  display:grid; grid-template-columns:repeat(5,1fr); gap:0;
+  margin-top:56px;
+  border:1px solid rgba(1,158,177,0.2);
+}
+.mstat {
+  padding:36px 24px; text-align:center;
+  border-right:1px solid rgba(1,158,177,0.15);
+  transition:background 0.25s;
+  cursor:default;
+}
+.mstat:last-child { border-right:none; }
+.mstat:hover { background:rgba(1,158,177,0.08); }
+.mstat-num {
+  font-family:'Bebas Neue',sans-serif; font-size:3.2rem;
+  color:var(--teal); line-height:1; margin-bottom:8px;
+  transition:color 0.2s;
+}
+.mstat:hover .mstat-num { color:var(--yellow); }
+.mstat-label { font-size:0.82rem; color:rgba(255,255,255,0.45); line-height:1.5; }
+.market-insight-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  margin-top:48px;
+}
+.insight-card {
+  padding:32px; position:relative; overflow:hidden;
+  background:rgba(1,158,177,0.06);
+  border:1px solid rgba(1,158,177,0.15);
+  transition:all 0.3s;
+}
+.insight-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--teal),var(--yellow));
+  transform:scaleX(0); transform-origin:left; transition:transform 0.3s;
+}
+.insight-card:hover { border-color:rgba(1,158,177,0.4); transform:translateY(-4px); }
+.insight-card:hover::before { transform:scaleX(1); }
+.insight-icon { font-size:2rem; margin-bottom:16px; }
+.insight-title {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:1rem; letter-spacing:1px; text-transform:uppercase;
+  color:var(--teal); margin-bottom:10px;
+}
+.insight-text { font-size:0.92rem; line-height:1.7; color:rgba(255,255,255,0.55); }
+
+/* ══════════════════════════════════
+   PRODUCT
+══════════════════════════════════ */
+.product { background:var(--white); }
+.product-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; align-items:center; margin-top:60px;
+}
+.product-can-side {
+  display:flex; flex-direction:column; gap:24px;
+}
+.product-can-hero {
+  display:flex; justify-content:center; position:relative;
+  padding:40px 0;
+}
+.product-can-hero img {
+  width:260px;
+  filter:drop-shadow(0 32px 48px rgba(1,158,177,0.3));
+  animation:float-can 6s ease-in-out infinite;
+}
+.formula-pills {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+}
+.fpill {
+  padding:16px 8px; text-align:center;
+  transition:all 0.25s; cursor:default;
+}
+.fpill-teal {
+  background:var(--teal); clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+}
+.fpill-yellow {
+  background:var(--yellow); clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+}
+.fpill:hover { transform:translateY(-3px) scale(1.04); }
+.fpill-val {
+  font-family:'Bebas Neue',sans-serif; font-size:1.6rem; line-height:1;
+  margin-bottom:4px;
+}
+.fpill-teal .fpill-val { color:var(--white); }
+.fpill-yellow .fpill-val { color:var(--dark); }
+.fpill-lbl { font-size:0.72rem; font-weight:600; letter-spacing:1px; }
+.fpill-teal .fpill-lbl { color:rgba(255,255,255,0.8); }
+.fpill-yellow .fpill-lbl { color:rgba(0,0,0,0.65); }
+
+.product-levels { display:flex; flex-direction:column; gap:0; }
+.level-card {
+  padding:28px 32px; border-left:4px solid transparent;
+  transition:all 0.25s; cursor:default;
+  border-bottom:1px solid var(--lgray);
+}
+.level-card:last-child { border-bottom:none; }
+.level-card:hover { border-left-color:var(--teal); background:var(--teal-lt); padding-left:40px; }
+.level-num {
+  font-family:'Bebas Neue',sans-serif; font-size:0.9rem;
+  letter-spacing:2px; color:var(--teal); margin-bottom:4px;
+}
+.level-title {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:1.1rem; letter-spacing:1px; text-transform:uppercase;
+  color:var(--dark); margin-bottom:8px;
+}
+.level-text { font-size:0.9rem; line-height:1.65; color:var(--gray); }
+
+/* ══════════════════════════════════
+   POSITIONING
+══════════════════════════════════ */
+.positioning { background:var(--dark); color:var(--white); }
+.positioning .section-intro { color:rgba(255,255,255,0.55); }
+.pos-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:0;
+  margin-top:56px;
+  border:1px solid rgba(1,158,177,0.2);
+}
+.pos-card {
+  padding:40px 32px;
+  border-right:1px solid rgba(1,158,177,0.2);
+  transition:background 0.25s;
+}
+.pos-card:last-child { border-right:none; }
+.pos-card:hover { background:rgba(1,158,177,0.06); }
+.pos-card-tag {
+  display:inline-block;
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:0.7rem; letter-spacing:3px; text-transform:uppercase;
+  padding:4px 12px; margin-bottom:20px;
+}
+.tag-pod { background:var(--teal); color:var(--white); }
+.tag-pop { background:var(--yellow); color:var(--dark); }
+.tag-poc { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.6); }
+.pos-card-title {
+  font-family:'Bebas Neue',sans-serif; font-size:1.8rem;
+  letter-spacing:2px; color:var(--white); margin-bottom:16px;
+}
+.pos-card ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.pos-card li {
+  font-size:0.9rem; line-height:1.6; color:rgba(255,255,255,0.55);
+  padding-left:20px; position:relative;
+}
+.pos-card li::before {
+  content:'✦'; position:absolute; left:0; top:1px;
+  font-size:0.6rem; color:var(--teal);
+}
+.pos-card:nth-child(2) li::before { color:var(--yellow); }
+
+.rfvp-box {
+  margin-top:48px; padding:40px 48px;
+  background:linear-gradient(135deg, rgba(1,158,177,0.12) 0%, rgba(255,219,79,0.08) 100%);
+  border:1px solid rgba(1,158,177,0.3);
+  position:relative; overflow:hidden;
+}
+.rfvp-box::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--teal), var(--yellow), var(--teal));
+  background-size:200% 100%; animation:gradient-slide 3s linear infinite;
+}
+@keyframes gradient-slide { from{background-position:0%} to{background-position:200%} }
+.rfvp-label {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:0.7rem; letter-spacing:4px; text-transform:uppercase;
+  color:var(--yellow); margin-bottom:16px;
+}
+.rfvp-text {
+  font-size:1.1rem; line-height:1.75; color:rgba(255,255,255,0.75);
+}
+.rfvp-text strong { color:var(--teal); }
+.rfvp-text em { color:var(--yellow); font-style:normal; font-weight:600; }
+
+/* ══════════════════════════════════
+   FINANCIALS
+══════════════════════════════════ */
+.financials { background:var(--off); }
+.fin-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:48px;
+  margin-top:56px;
+}
+.fin-card {
+  background:var(--white); padding:40px;
+  box-shadow:0 2px 24px rgba(0,0,0,0.06);
+  border-top:4px solid var(--teal);
+}
+.fin-card:nth-child(2) { border-top-color:var(--yellow); }
+.fin-card-title {
+  font-family:'Bebas Neue',sans-serif; font-size:1.6rem;
+  letter-spacing:2px; color:var(--dark); margin-bottom:24px;
+}
+.fin-metric {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 0; border-bottom:1px solid var(--lgray);
+}
+.fin-metric:last-child { border-bottom:none; }
+.fin-metric-label { font-size:0.9rem; color:var(--gray); }
+.fin-metric-val {
+  font-family:'Bebas Neue',sans-serif; font-size:1.4rem;
+  color:var(--teal); letter-spacing:1px;
+}
+.fin-card:nth-child(2) .fin-metric-val { color:var(--yellow-dk); }
+
+.scenario-table {
+  margin-top:24px; width:100%; border-collapse:collapse;
+}
+.scenario-table th {
+  background:var(--dark); color:var(--white);
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:0.8rem; letter-spacing:1.5px; text-transform:uppercase;
+  padding:12px 16px; text-align:left;
+}
+.scenario-table td {
+  padding:14px 16px; font-size:0.9rem;
+  border-bottom:1px solid var(--lgray);
+}
+.scenario-table tr:last-child td { border-bottom:none; }
+.scenario-table tr:hover td { background:var(--teal-lt); }
+.scenario-highlight td { background:rgba(1,158,177,0.08); font-weight:600; color:var(--teal-dk); }
+
+/* ══════════════════════════════════
+   GO TO MARKET
+══════════════════════════════════ */
+.gtm { background:var(--white); }
+.gtm-columns {
+  display:grid; grid-template-columns:1fr 1fr; gap:60px;
+  margin-top:56px;
+}
+.gtm-col-title {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:0.8rem; letter-spacing:3px; text-transform:uppercase;
+  color:var(--gray); margin-bottom:24px;
+  padding-bottom:12px; border-bottom:2px solid var(--lgray);
+}
+.strategy-cards { display:flex; flex-direction:column; gap:16px; }
+.strategy-card {
+  display:flex; gap:20px; align-items:flex-start;
+  padding:20px 24px;
+  border:1px solid var(--lgray);
+  transition:all 0.25s; cursor:default;
+}
+.strategy-card:hover {
+  border-color:var(--teal);
+  background:var(--teal-lt);
+  transform:translateX(4px);
+}
+.strategy-icon {
+  width:44px; height:44px; flex-shrink:0;
+  background:var(--teal);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem;
+  clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);
+}
+.strategy-card:nth-child(even) .strategy-icon { background:var(--yellow); }
+.strategy-title {
+  font-family:'Barlow Condensed',sans-serif; font-weight:700;
+  font-size:1rem; letter-spacing:1px; text-transform:uppercase;
+  color:var(--dark); margin-bottom:6px;
+}
+.strategy-text { font-size:0.88rem; line-height:1.6; color:var(--gray); }
+
+.price-breakdown {
+  background:var(--dark); padding:36px; color:var(--white);
+}
+.price-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.price-row:last-child { border-bottom:none; border-top:2px solid var(--teal); margin-top:4px; }
+.price-label { font-size:0.9rem; color:rgba(255,255,255,0.55); }
+.price-val {
+  font-family:'Bebas Neue',sans-serif; font-size:1.4rem;
+  letter-spacing:1px;
+}
+.price-pos { color:var(--teal); }
+.price-neg { color:rgba(255,100,100,0.8); }
+.price-total { color:var(--yellow); }
+
+/* ══════════════════════════════════
+   CLOSING CTA
+══════════════════════════════════ */
+.cta-section {
+  background:var(--teal); position:relative; overflow:hidden;
+  padding:100px 56px; text-align:center;
+}
+.cta-section::before {
+  content:''; position:absolute; inset:0;
+  background:repeating-conic-gradient(rgba(0,0,0,0.04) 0deg,rgba(0,0,0,0.04) 5deg,transparent 5deg,transparent 20deg);
+  animation:spin-slow 80s linear infinite;
+}
+@keyframes spin-slow { to{transform:rotate(360deg)} }
+.cta-inner { position:relative; z-index:1; max-width:780px; margin:0 auto; }
+.cta-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,6vw,6rem);
+  line-height:0.95; letter-spacing:3px;
+  color:var(--dark); margin-bottom:20px;
+}
+.cta-title span { color:var(--white); }
+.cta-sub {
+  font-size:1.1rem; line-height:1.7;
+  color:rgba(0,0,0,0.65); margin-bottom:40px;
+}
+.cta-team {
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:0.85rem; letter-spacing:2px; text-transform:uppercase;
+  color:rgba(0,0,0,0.5); margin-top:48px;
+}
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
+footer {
+  background:var(--dark);
+  padding:40px 56px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-top:1px solid rgba(1,158,177,0.15);
+}
+.footer-logo img { height:32px; opacity:0.7; }
+.footer-copy { font-size:0.78rem; color:rgba(255,255,255,0.25); }
+.footer-links { display:flex; gap:24px; }
+.footer-links a {
+  font-size:0.78rem; color:rgba(255,255,255,0.3);
+  text-decoration:none; transition:color 0.2s;
+}
+.footer-links a:hover { color:var(--teal); }
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media(max-width:1024px) {
+  nav { padding:16px 24px; }
+  .nav-links { display:none; }
+  section { padding:70px 24px; }
+  .hero-inner { grid-template-columns:1fr; padding:100px 24px 60px; gap:32px; }
+  .hero-right { display:none; }
+  .hero-can-wrap { order:-1; }
+  .hero-can { width:220px; }
+  .market-stats-row { grid-template-columns:repeat(3,1fr); }
+  .market-insight-grid { grid-template-columns:1fr; }
+  .product-grid { grid-template-columns:1fr; gap:40px; }
+  .pos-grid { grid-template-columns:1fr; }
+  .pos-card { border-right:none; border-bottom:1px solid rgba(1,158,177,0.2); }
+  .fin-grid { grid-template-columns:1fr; }
+  .gtm-columns { grid-template-columns:1fr; gap:40px; }
+  footer { flex-direction:column; gap:20px; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <img src="logo.png" alt="Sun Cruiser Zero">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#market">Opportunity</a></li>
+    <li><a href="#product">Product</a></li>
+    <li><a href="#positioning">Positioning</a></li>
+    <li><a href="#financials">Financials</a></li>
+    <li><a href="#gtm">Go-to-Market</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('financials').scrollIntoView({behavior:'smooth'})">See the Numbers</button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+
+    <div class="hero-left">
+      <div class="hero-eyebrow">MARK 20100 · Team 25 · Boston Beer Company</div>
+      <h1 class="hero-headline">
+        <span class="hl-teal">SUN</span><br>
+        <span class="hl-teal">CRUISER</span><br>
+        <span class="hl-yellow">ZERO</span>
+      </h1>
+      <p class="hero-sub">The first non-alcoholic iced tea energy drink with social credibility — 200mg caffeine, three electrolytes, B vitamins, and the brand equity of the #4 RTD spirit in America.</p>
+      <div class="hero-buttons">
+        <a class="btn-primary" href="#product">See the Product</a>
+        <a class="btn-outline" href="#market">The Opportunity</a>
+      </div>
+    </div>
+
+    <div class="hero-can-wrap">
+      <div class="hero-can-glow"></div>
+      <img class="hero-can" src="can.png" alt="Sun Cruiser Zero Can">
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div class="hero-stat reveal">
+          <div class="stat-num">400%</div>
+          <div class="stat-label">Sun Cruiser volume growth<br>in its first year (2024–2025)</div>
+        </div>
+        <div class="hero-stat reveal reveal-d1">
+          <div class="stat-num">$24B</div>
+          <div class="stat-label">U.S. energy drink market<br>targeted for 1% share by 2030</div>
+        </div>
+        <div class="hero-stat reveal reveal-d2">
+          <div class="stat-num">7.52M</div>
+          <div class="stat-label">addressable Gen Z college<br>students (18–24)</div>
+        </div>
+        <div class="hero-stat reveal reveal-d3">
+          <div class="stat-num">$240M</div>
+          <div class="stat-label">projected annual revenue<br>at base scenario</div>
+        </div>
+        <div class="hero-stat reveal reveal-d4">
+          <div class="stat-num">130%</div>
+          <div class="stat-label">return on customer<br>acquisition cost (CLROI)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">0% Alcohol</span>
+    <span class="ticker-item">200mg Caffeine</span>
+    <span class="ticker-item">3 Electrolytes</span>
+    <span class="ticker-item">B Vitamins</span>
+    <span class="ticker-item">10 Calories</span>
+    <span class="ticker-item">No Bubbles</span>
+    <span class="ticker-item">Gluten Free</span>
+    <span class="ticker-item">Sun Cruiser Flavor</span>
+    <span class="ticker-item">Social Credibility</span>
+    <span class="ticker-item">0% Alcohol</span>
+    <span class="ticker-item">200mg Caffeine</span>
+    <span class="ticker-item">3 Electrolytes</span>
+    <span class="ticker-item">B Vitamins</span>
+    <span class="ticker-item">10 Calories</span>
+    <span class="ticker-item">No Bubbles</span>
+    <span class="ticker-item">Gluten Free</span>
+    <span class="ticker-item">Sun Cruiser Flavor</span>
+    <span class="ticker-item">Social Credibility</span>
+  </div>
+</div>
+
+<!-- ── MARKET OPPORTUNITY ── -->
+<section class="market" id="market">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">The Opportunity</div>
+      <h2 class="section-title">THE MARKET IS <span class="hl-teal">MOVING</span><br>TOWARD <span class="hl-yellow">ZERO</span></h2>
+      <p class="section-intro">Gen Z is drinking less than any generation before it. Alcohol consumption has declined for four consecutive years. The sober-curious movement is not a niche — it's an accelerating mainstream preference that no premium brand currently owns.</p>
+    </div>
+
+    <div class="market-stats-row reveal">
+      <div class="mstat"><div class="mstat-num">+30%</div><div class="mstat-label">Non-alc beverage growth YoY (2024)</div></div>
+      <div class="mstat"><div class="mstat-num">41%</div><div class="mstat-label">Gen Z consumers identifying as sober-curious</div></div>
+      <div class="mstat"><div class="mstat-num">+24%</div><div class="mstat-label">RTD spirits category growth (2024)</div></div>
+      <div class="mstat"><div class="mstat-num">85%</div><div class="mstat-label">Boston Beer 2024 volume from "Beyond Beer"</div></div>
+      <div class="mstat"><div class="mstat-num">#4</div><div class="mstat-label">Sun Cruiser ranking in RTD spirits (2025)</div></div>
+    </div>
+
+    <div class="market-insight-grid">
+      <div class="insight-card reveal reveal-d1">
+        <div class="insight-icon">📉</div>
+        <div class="insight-title">Declining Alcohol Consumption</div>
+        <div class="insight-text">Per-capita alcohol consumption has declined for four consecutive years. Gen Z drinks roughly 20% less than Millennials did at the same age, driven by health consciousness and a shift toward functional beverages.</div>
+      </div>
+      <div class="insight-card reveal reveal-d2">
+        <div class="insight-icon">⚡</div>
+        <div class="insight-title">Functional Beverage Explosion</div>
+        <div class="insight-text">Consumers increasingly expect their beverages to do something — hydrate, energize, recover. Celsius grew revenue over 100% in 2023 on exactly this thesis. Sun Cruiser Zero enters this space with a social-occasion advantage Celsius cannot match.</div>
+      </div>
+      <div class="insight-card reveal reveal-d3">
+        <div class="insight-icon">🎯</div>
+        <div class="insight-title">White Space Nobody Owns</div>
+        <div class="insight-text">No brand currently sits at the intersection of social occasion credibility + functional energy + zero alcohol. Water and soda lack credibility. Celsius lacks social legitimacy at parties. Sun Cruiser Zero fills the gap.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCT ── -->
+<section class="product" id="product">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">The Product</div>
+      <h2 class="section-title">BUILT FOR THE<br><span class="hl-teal">NIGHT OUT</span><br><span class="hl-yellow">AND THE MORNING AFTER</span></h2>
+      <p class="section-intro">A low-sugar, alcohol-free iced tea energy drink fortified with three electrolytes and B vitamins — engineered to deliver clean functional energy while carrying the social credibility of a premium lifestyle brand.</p>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-can-side reveal">
+        <div class="product-can-hero">
+          <img src="can.png" alt="Sun Cruiser Zero">
+        </div>
+        <div class="formula-pills">
+          <div class="fpill fpill-teal reveal reveal-d1">
+            <div class="fpill-val">200mg</div>
+            <div class="fpill-lbl">Caffeine</div>
+          </div>
+          <div class="fpill fpill-yellow reveal reveal-d2">
+            <div class="fpill-val">10</div>
+            <div class="fpill-lbl">Calories</div>
+          </div>
+          <div class="fpill fpill-teal reveal reveal-d3">
+            <div class="fpill-val">3×</div>
+            <div class="fpill-lbl">Electrolytes</div>
+          </div>
+          <div class="fpill fpill-yellow reveal reveal-d4">
+            <div class="fpill-val">0%</div>
+            <div class="fpill-lbl">Alcohol</div>
+          </div>
+          <div class="fpill fpill-teal reveal reveal-d1">
+            <div class="fpill-val">1g</div>
+            <div class="fpill-lbl">Sugar</div>
+          </div>
+          <div class="fpill fpill-yellow reveal reveal-d2">
+            <div class="fpill-val">B6+B12</div>
+            <div class="fpill-lbl">Vitamins</div>
+          </div>
+          <div class="fpill fpill-teal reveal reveal-d3">
+            <div class="fpill-val">400mg</div>
+            <div class="fpill-lbl">Sodium</div>
+          </div>
+          <div class="fpill fpill-yellow reveal reveal-d4">
+            <div class="fpill-val">GF</div>
+            <div class="fpill-lbl">Gluten Free</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-levels reveal reveal-d2">
+        <div class="level-card">
+          <div class="level-num">01 · CORE CUSTOMER VALUE</div>
+          <div class="level-title">Social Confidence Without Compromise</div>
+          <div class="level-text">The job-to-be-done isn't "drink a tea" — it's "belong at the party, fully present, with zero pressure to drink alcohol." Sustained energy and hydration that fits seamlessly into an active lifestyle without the sugar crash or guilt of traditional energy drinks.</div>
+        </div>
+        <div class="level-card">
+          <div class="level-num">02 · ACTUAL PRODUCT</div>
+          <div class="level-title">The Physical Can</div>
+          <div class="level-text">Non-alc brewed iced tea with 200mg caffeine (green tea + guarana), 400mg sodium, 100mg potassium, 60mg magnesium, 2mg B6, 3mcg B12. Zero carbonation — bubble-free and smooth. The same Sun Cruiser flavors the consumer already loves.</div>
+        </div>
+        <div class="level-card">
+          <div class="level-num">03 · AUGMENTED PRODUCT</div>
+          <div class="level-title">Brand Equity & Social Identity</div>
+          <div class="level-text">Something you can drink at the gym or a party that implicitly promises no hangover, no sugar crash, and no compromise — with the social currency of something that looks and feels like a real drink. MLB, NFL, and AEG concert series partnerships transfer directly.</div>
+        </div>
+        <div class="level-card">
+          <div class="level-num">04 · DESIRED PRODUCT</div>
+          <div class="level-title">The Ideal the Consumer Actually Wants</div>
+          <div class="level-text">A functional beverage for health-forward consumers who seek a drink that signals wellness, taste, and intention without compromising on flavor or energy performance. All the social ease of a drink — zero alcohol, zero regrets, full energy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── POSITIONING ── -->
+<section class="positioning" id="positioning">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Competitive Positioning</div>
+      <h2 class="section-title" style="color:var(--white)">CELSIUS VS.<br><span class="hl-teal">SUN CRUISER</span> <span class="hl-yellow">ZERO</span></h2>
+      <p class="section-intro">Sun Cruiser Zero matches Celsius on every functional credential that matters while winning on hydration, format, and social versatility — making it the stronger choice for health-conscious consumers who don't stop at the gym.</p>
+    </div>
+
+    <div class="pos-grid reveal">
+      <div class="pos-card">
+        <span class="pos-card-tag tag-pod">Points of Difference</span>
+        <div class="pos-card-title">Where We Win</div>
+        <ul>
+          <li>Three-electrolyte hydration formula (400mg Na, 100mg K, 60mg Mg) — Celsius has none</li>
+          <li>Bubble-free format — lighter on the stomach, easier for all-day drinking</li>
+          <li>Social credibility of a lifestyle brand vs. a fitness brand — fits parties AND gyms</li>
+          <li>Sun Cruiser flavor DNA — familiar, premium, no artificial aftertaste</li>
+          <li>0% ABV opens retail channels unavailable to alcoholic SKUs (gyms, campus stores, Amazon DTC)</li>
+          <li>No federal excise tax — stronger unit margins than all alcoholic Boston Beer products</li>
+        </ul>
+      </div>
+      <div class="pos-card">
+        <span class="pos-card-tag tag-pop">Points of Parity</span>
+        <div class="pos-card-title">Where We Match</div>
+        <ul>
+          <li>200mg natural caffeine — equivalent to Celsius MetaPlus formula</li>
+          <li>10 calories per can — near-zero calorie profile</li>
+          <li>1g sugar — matches Celsius' low-sugar positioning</li>
+          <li>B vitamins (B6 + B12) — functional standard in the category</li>
+          <li>Natural flavor positioning — no artificial additives</li>
+          <li>$2.29/can retail price — 15% premium over Celsius NBA ($1.67), justified by social utility + brand appeal</li>
+        </ul>
+      </div>
+      <div class="pos-card">
+        <span class="pos-card-tag tag-poc">Points of Contention</span>
+        <div class="pos-card-title">Where We Differ</div>
+        <ul>
+          <li>Celsius claims thermogenesis (fat oxidation) — we do not; we lead on hydration instead</li>
+          <li>Celsius has deeper gym/fitness brand recognition — we have superior social occasion fit</li>
+          <li>Celsius is carbonated — we argue non-carbonated is a feature, not a limitation</li>
+          <li>Celsius has broader current distribution — we leverage Boston Beer's 50-state wholesale network</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rfvp-box reveal">
+      <div class="rfvp-label">Resonating Focus Value Proposition</div>
+      <div class="rfvp-text">
+        Sun Cruiser Zero enables <strong>sober-curious Gen Z college students (18–24)</strong> to participate fully in social occasions — delivering <strong>200mg caffeine, a three-electrolyte hydration formula, and the same Sun Cruiser flavor</strong> they already trust — so they never have to choose between showing up and feeling great the next morning, unlike <em>Celsius or Liquid Death</em> which signal workout, not party.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINANCIALS ── -->
+<section class="financials" id="financials">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">The Business Case</div>
+      <h2 class="section-title">THE NUMBERS<br><span class="hl-teal">WORK</span></h2>
+      <p class="section-intro">By capturing 1% of the $23.9B energy drink market by 2030, Sun Cruiser Zero adds 200+ basis points to Boston Beer's five-year revenue CAGR and generates approximately $240M in annual revenue — with unit economics that are profitable from day one.</p>
+    </div>
+
+    <div class="fin-grid">
+      <div class="fin-card reveal reveal-d1">
+        <div class="fin-card-title">Customer Lifetime Value</div>
+        <div class="fin-metric">
+          <div class="fin-metric-label">New Customer CLV (5-year)</div>
+          <div class="fin-metric-val">$189</div>
+        </div>
+        <div class="fin-metric">
+          <div class="fin-metric-label">Existing Sun Cruiser Customer CLV</div>
+          <div class="fin-metric-val">$289</div>
+        </div>
+        <div class="fin-metric">
+          <div class="fin-metric-label">Blended CLV (60% new / 40% existing)</div>
+          <div class="fin-metric-val">$226</div>
+        </div>
+        <div class="fin-metric">
+          <div class="fin-metric-label">Customer Acquisition Cost</div>
+          <div class="fin-metric-val">$82</div>
+        </div>
+        <div class="fin-metric">
+          <div class="fin-metric-label">Return on Acquisition (CLROI)</div>
+          <div class="fin-metric-val">130%</div>
+        </div>
+        <div class="fin-metric">
+          <div class="fin-metric-label">Assumptions</div>
+          <div class="fin-metric-val" style="font-size:0.8rem;color:var(--gray)">8% discount rate · 45% gross margin · 65%/75% retention</div>
+        </div>
+      </div>
+
+      <div class="fin-card reveal reveal-d2">
+        <div class="fin-card-title">Customer Equity Scenarios</div>
+        <table class="scenario-table">
+          <thead>
+            <tr><th>Scenario</th><th>Market Share</th><th>Customers</th><th>Equity</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Conservative (KPI)</td><td>1.0%</td><td>75,200</td><td>$17M</td></tr>
+            <tr class="scenario-highlight"><td>Base</td><td>2.5%</td><td>188,000</td><td>$42.5M</td></tr>
+            <tr><td>Optimistic</td><td>5.0%</td><td>376,000</td><td>$85M</td></tr>
+            <tr><td>Full Segment</td><td>25%</td><td>1.88M</td><td>$425M</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:20px;padding:16px;background:var(--teal-lt);font-size:0.85rem;color:var(--teal-dk);line-height:1.6;">
+          <strong>Key Driver:</strong> At 3 cans/week (new) + 2 incremental cans/week (existing) at $2.29/can with a 45% gross margin, the unit economics deliver $189 CLV per new customer — profitable at the individual level.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GO TO MARKET ── -->
+<section class="gtm" id="gtm">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Go-to-Market</div>
+      <h2 class="section-title">PRICE · PLACE<br><span class="hl-teal">PROMOTION</span></h2>
+      <p class="section-intro">Sun Cruiser Zero routes through Boston Beer's established 50-state wholesale network while unlocking retail channels unavailable to alcoholic SKUs. The promotional strategy pairs macro-influencer reach with on-campus sampling timed to drive high-frequency trial.</p>
+    </div>
+
+    <div class="gtm-columns">
+      <div>
+        <div class="gtm-col-title reveal">Price & Place Strategy</div>
+        <div class="price-breakdown reveal reveal-d1">
+          <div class="price-row">
+            <div class="price-label">Next-Best Alternative (Celsius NBA)</div>
+            <div class="price-val price-pos">$1.67</div>
+          </div>
+          <div class="price-row">
+            <div class="price-label">+ Social/Going-Out Utility</div>
+            <div class="price-val price-pos">+$1.00</div>
+          </div>
+          <div class="price-row">
+            <div class="price-label">+ Brand Appeal (Sun Cruiser equity)</div>
+            <div class="price-val price-pos">+$0.50</div>
+          </div>
+          <div class="price-row">
+            <div class="price-label">+ Taste & Drinkability</div>
+            <div class="price-val price-pos">+$0.25</div>
+          </div>
+          <div class="price-row">
+            <div class="price-label">+ Multi-Use Functionality</div>
+            <div class="price-val price-pos">+$0.25</div>
+          </div>
+          <div class="price-row">
+            <div class="price-label">− Lower Fitness Credibility</div>
+            <div class="price-val price-neg">−$0.50</div>
+          </div>
+          <div class="price-row">
+            <div class="price-label"><strong>True Economic Value</strong></div>
+            <div class="price-val" style="color:rgba(255,255,255,0.7)">$3.17</div>
+          </div>
+          <div class="price-row">
+            <div class="price-label"><strong>Launch Price (Penetration Strategy)</strong></div>
+            <div class="price-val price-total">$2.29</div>
+          </div>
+        </div>
+
+        <div class="strategy-cards" style="margin-top:24px;">
+          <div class="strategy-card reveal reveal-d2">
+            <div class="strategy-icon">🏪</div>
+            <div>
+              <div class="strategy-title">Retail Placement</div>
+              <div class="strategy-text">Kroger, Target, Walmart, 7-Eleven, Wawa — leveraging Boston Beer's established distributor relationships for favorable shelf placement alongside Celsius and Liquid Death.</div>
+            </div>
+          </div>
+          <div class="strategy-card reveal reveal-d3">
+            <div class="strategy-icon">🏋️</div>
+            <div>
+              <div class="strategy-title">New Channels</div>
+              <div class="strategy-text">Gyms, campus stores, Amazon DTC (suncruiser.com) — channels unavailable to alcoholic SKUs, unlocked by the 0% ABV formula and generating incremental distribution without cannibalizing existing Sun Cruiser.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="gtm-col-title reveal">Promotional Strategy</div>
+        <div class="strategy-cards">
+          <div class="strategy-card reveal reveal-d1">
+            <div class="strategy-icon">📱</div>
+            <div>
+              <div class="strategy-title">Macro-Influencers</div>
+              <div class="strategy-text">Building broad awareness for both Sun Cruiser and Sun Cruiser Zero through lifestyle creators — leveraging existing MLB, NFL, and AEG concert series partnerships to reach the Gen Z audience at scale.</div>
+            </div>
+          </div>
+          <div class="strategy-card reveal reveal-d2">
+            <div class="strategy-icon">🎓</div>
+            <div>
+              <div class="strategy-title">On-Campus Sampling</div>
+              <div class="strategy-text">Targeting campuses around finals seasons to drive high-frequency trial — when the "study session + social" use case peaks. Duncan Student Center-style activations at major universities.</div>
+            </div>
+          </div>
+          <div class="strategy-card reveal reveal-d3">
+            <div class="strategy-icon">🎯</div>
+            <div>
+              <div class="strategy-title">Micro-Influencers</div>
+              <div class="strategy-text">Focused awareness toward college campuses and Gen Z — athletes in-season, student athletes who can't drink, wellness-forward students who want to show up socially without alcohol.</div>
+            </div>
+          </div>
+          <div class="strategy-card reveal reveal-d4">
+            <div class="strategy-icon">📦</div>
+            <div>
+              <div class="strategy-title">Messaging Framework</div>
+              <div class="strategy-text">Three pillars: Familiar Flavors (same Sun Cruiser taste), Functional Identity (gym, study, social), Health Credibility (200mg caffeine, electrolytes, B vitamins, 10 calories). Boston Beer's first non-alc position.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="reveal">
+      <h2 class="cta-title">THE FIRST DRINK<br>THAT <span>FITS EVERYWHERE</span></h2>
+      <p class="cta-sub">Sun Cruiser Zero is not a departure from Boston Beer's strategy — it's the logical next step. The company has spent a decade following the consumer away from traditional beer toward flavored, sessionable, lower-calorie options. Sober-curious consumers are the next group to follow.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a class="btn-primary" style="background:var(--dark);color:var(--yellow);" href="#market">The Market</a>
+        <a class="btn-primary" href="#product">The Product</a>
+      </div>
+      <div class="cta-team">
+        James Livingstone · Jason Marrs · Sebu Najarian · Aiden O'Reilly · Quinn Reilly · Stephen Wu<br>
+        MARK 20100 · Foundations of Marketing · Spring 2026 · Team 25
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <img src="logo.png" alt="Sun Cruiser Zero">
+  </div>
+  <div class="footer-copy">© 2026 Boston Beer Company (NYSE: SAM) · Sun Cruiser Zero is a student marketing concept by Team 25, Mendoza College of Business, University of Notre Dame · MARK 20100 Final Project</div>
+  <div class="footer-links">
+    <a href="#market">Opportunity</a>
+    <a href="#product">Product</a>
+    <a href="#gtm">Strategy</a>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold: 0.1});
+reveals.forEach(el => observer.observe(el));
+
+// Nav shrink on scroll
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// Counter animation for stats
+function animateCount(el, target, suffix) {
+  let start = 0;
+  const duration = 1800;
+  const startTime = performance.now();
+  const isFloat = target % 1 !== 0;
+  function step(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    const val = start + (target - start) * ease;
+    el.textContent = (isFloat ? val.toFixed(1) : Math.round(val)) + suffix;
+    if(progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+const statObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      const el = e.target;
+      const txt = el.textContent;
+      const num = parseFloat(txt.replace(/[^0-9.]/g,''));
+      const suffix = txt.replace(/[0-9.]/g,'');
+      if(!isNaN(num) && num > 0) animateCount(el, num, suffix);
+      statObserver.unobserve(el);
+    }
+  });
+}, {threshold: 0.5});
+document.querySelectorAll('.mstat-num, .stat-num').forEach(el => statObserver.observe(el));
+
+// Parallax hero glow
+window.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 30;
+  const y = (e.clientY / window.innerHeight - 0.5) * 30;
+  const glow = document.querySelector('.hero-glow');
+  if(glow) glow.style.transform = `translate(${x}px, ${y}px)`;
+});
+</script>
+</body>
+</html>
